@@ -1,0 +1,78 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h1>Calendrier des événements</h1>
+    <button class="add-event-btn" (click)="createNewEvent()">
+      Nouvel événement
+    </button>
+  </div>
+
+  <div class="calendar-wrapper">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" *ngIf="showEventModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ isNewEvent ? 'Nouvel événement' : 'Modifier l\'événement' }}</h2>
+        <button class="close-btn" (click)="showEventModal = false">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="title">Titre</label>
+          <input
+            type="text"
+            id="title"
+            [(ngModel)]="currentEvent.title"
+            class="form-control"
+            placeholder="Titre de l'événement"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="start">Début</label>
+          <input
+            type="datetime-local"
+            id="start"
+            [(ngModel)]="currentEvent.start"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="end">Fin</label>
+          <input
+            type="datetime-local"
+            id="end"
+            [(ngModel)]="currentEvent.end"
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            [(ngModel)]="currentEvent.description"
+            class="form-control"
+            rows="3"
+            placeholder="Description de l'événement"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="delete-btn" *ngIf="!isNewEvent" (click)="deleteEvent()">
+          Supprimer
+        </button>
+        <button class="cancel-btn" (click)="showEventModal = false">
+          Annuler
+        </button>
+        <button class="save-btn" (click)="saveEvent()">
+          {{ isNewEvent ? 'Créer' : 'Modifier' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
