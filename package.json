@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build:ssr": "ng run web_event:build:ssr && ng run web_event:server",
     "serve:ssr:web_event": "node dist/web_event/server/server.mjs"
   },
   "private": true,
